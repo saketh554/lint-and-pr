@@ -1,10 +1,11 @@
 name: Pull Request Validation
+
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited, labeled]
 
 jobs:
-    check-pr-metadata:
+  check-pr-metadata:
     name: Check PR title and reviewers
     runs-on: ubuntu-latest
 
@@ -19,8 +20,7 @@ jobs:
               core.setFailed(`❌ PR title "${title}" does not match required format (e.g., ABC-123: Add login)`);
             }
 
-
-    lint-and-test:
+  lint-and-test:
     name: Run Linter and Tests
     runs-on: ubuntu-latest
 
@@ -31,7 +31,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -40,7 +40,7 @@ jobs:
       - name: Run flake8 (Lint Check)
         run: |
           flake8 .
-      
+
       - name: Run Tests
         run: |
           pytest
